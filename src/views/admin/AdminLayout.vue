@@ -57,6 +57,7 @@ export default {
         { path: '/admin/peluqueros', icon: '✂️', label: 'Peluqueros' },
         { path: '/admin/horarios', icon: '🕐', label: 'Horarios' },
         { path: '/admin/bloqueos', icon: '🚫', label: 'Bloqueos' },
+        { path: '/admin/negocio', icon: '🏪', label: 'Mi Negocio' },
         { path: '/admin/ajustes', icon: '⚙️', label: 'Ajustes' }
       ]
     }

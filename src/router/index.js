@@ -63,6 +63,11 @@ const routes = [
         component: () => import("../views/admin/BlocksView.vue"),
       },
       {
+        path: "negocio",
+        name: "AdminBusiness",
+        component: () => import("../views/admin/BusinessView.vue"),
+      },
+      {
         path: "ajustes",
         name: "AdminSettings",
         component: () => import("../views/admin/SettingsView.vue"),
