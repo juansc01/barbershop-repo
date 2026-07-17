@@ -408,14 +408,11 @@ tr:hover td {
     margin-bottom: 40px;
   }
 
-  select.input {
-    font-size: 16px; /* Prevents iOS zoom on focus */
-  }
-
-  input[type="date"].input,
-  input[type="time"].input,
-  input[type="datetime-local"].input {
-    font-size: 16px; /* Prevents iOS zoom on focus */
+  .input,
+  input.input,
+  select.input,
+  textarea.input {
+    font-size: 16px !important; /* Prevents iOS zoom on focus */
   }
 
   .form-group {
