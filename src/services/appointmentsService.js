@@ -62,13 +62,43 @@ export const appointmentsService = {
     return data
   },
 
+  async checkSlotAvailable(barberId, startTime, endTime) {
+    const { data, error } = await supabase
+      .from('appointments')
+      .select('id')
+      .eq('barber_id', barberId)
+      .neq('status', 'cancelled')
+      .lt('start_time', endTime)
+      .gt('end_time', startTime)
+      .limit(1)
+
+    if (error) throw error
+    return !data || data.length === 0
+  },
+
   async create(appointment) {
+    // Double-check availability before inserting (concurrency guard)
+    const isAvailable = await this.checkSlotAvailable(
+      appointment.barber_id,
+      appointment.start_time,
+      appointment.end_time
+    )
+    if (!isAvailable) {
+      throw new Error('SLOT_TAKEN')
+    }
+
     const { data, error } = await supabase
       .from('appointments')
       .insert(appointment)
       .select()
       .single()
-    if (error) throw error
+    if (error) {
+      // Database trigger also prevents overlaps
+      if (error.message && error.message.includes('SLOT_TAKEN')) {
+        throw new Error('SLOT_TAKEN')
+      }
+      throw error
+    }
     return data
   },
 

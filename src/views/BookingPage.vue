@@ -412,7 +412,7 @@ export default {
         const endTime = new Date(startTime)
         endTime.setMinutes(endTime.getMinutes() + this.selectedService.duration)
 
-        // Create appointment
+        // Create appointment (includes concurrency check)
         await appointmentsService.create({
           barber_id: this.selectedBarber.id,
           service_id: this.selectedService.id,
@@ -427,7 +427,15 @@ export default {
         this.currentStep = 6
         useToast().success('¡Cita reservada con éxito!')
       } catch (e) {
-        useToast().error('Error al confirmar la cita. Inténtalo de nuevo.')
+        if (e.message === 'SLOT_TAKEN') {
+          useToast().error('¡Esa hora ya ha sido reservada por otro cliente! Por favor elige otra hora.')
+          // Go back to time selection step and refresh slots
+          this.currentStep = 3
+          this.selectedSlot = null
+          this.loadSlots()
+        } else {
+          useToast().error('Error al confirmar la cita. Inténtalo de nuevo.')
+        }
       }
       this.submitting = false
     },
