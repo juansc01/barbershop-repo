@@ -5,12 +5,12 @@
       <div class="container header-inner">
         <router-link to="/" class="back-link">← Volver</router-link>
         <span class="header-title">Reservar cita</span>
-        <span class="step-indicator">Paso {{ currentStep }} de 5</span>
+        <span v-if="currentStep <= 5" class="step-indicator">Paso {{ currentStep }} de 5</span>
       </div>
     </header>
 
     <!-- Progress bar -->
-    <div class="progress-bar">
+    <div v-if="currentStep <= 5" class="progress-bar">
       <div class="progress-fill" :style="{ width: (currentStep / 5) * 100 + '%' }"></div>
     </div>
 
