@@ -306,11 +306,12 @@ export default {
 .photo-actions { display: flex; flex-direction: column; gap: 6px; }
 .upload-btn { cursor: pointer; }
 .modal-title { font-size: 18px; font-weight: 700; margin-bottom: 24px; }
-.modal-actions { display: flex; gap: 12px; justify-content: flex-end; margin-top: 24px; }
+.modal-actions { display: flex; gap: 12px; justify-content: flex-end; margin-top: 24px; flex-wrap: wrap; }
 
 @media (max-width: 768px) {
   .barber-item { flex-direction: column; align-items: flex-start; }
   .barber-actions { align-self: flex-end; }
+  .modal-actions .btn { flex: 1 1 auto; min-width: 0; padding: 10px 12px; font-size: 13px; }
 }
 </style>
 

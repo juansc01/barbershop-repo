@@ -153,15 +153,18 @@ export default {
 .service-meta { display: flex; gap: 12px; font-size: 13px; color: var(--text-tertiary); align-items: center; }
 .service-actions { display: flex; gap: 4px; flex-shrink: 0; }
 
-.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-.form-group { margin-bottom: 16px; }
+.form-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px; }
+.form-group { margin-bottom: 16px; min-width: 0; overflow: hidden; }
+.form-row .form-group { margin-bottom: 0; }
 .color-input { width: 60px; height: 36px; border: none; border-radius: var(--radius-sm); cursor: pointer; }
 .modal-title { font-size: 18px; font-weight: 700; margin-bottom: 24px; }
-.modal-actions { display: flex; gap: 12px; justify-content: flex-end; margin-top: 24px; }
+.modal-actions { display: flex; gap: 12px; justify-content: flex-end; margin-top: 24px; flex-wrap: wrap; }
 
 @media (max-width: 768px) {
   .service-item { flex-direction: column; align-items: flex-start; }
   .service-actions { align-self: flex-end; }
+  .modal-actions .btn { flex: 1 1 auto; min-width: 0; padding: 10px 12px; font-size: 13px; }
+  .form-row { grid-template-columns: 1fr; }
 }
 </style>
 

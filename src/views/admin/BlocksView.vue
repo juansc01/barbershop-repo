@@ -412,10 +412,11 @@ export default {
 .block-info span { color: var(--text-secondary); font-size: 13px; }
 .block-reason { font-style: italic; }
 
-.form-group { margin-bottom: 16px; }
-.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.form-group { margin-bottom: 16px; min-width: 0; overflow: hidden; }
+.form-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px; }
+.form-row .form-group { margin-bottom: 0; }
 .modal-title { font-size: 18px; font-weight: 700; margin-bottom: 24px; }
-.modal-actions { display: flex; gap: 12px; justify-content: flex-end; margin-top: 24px; }
+.modal-actions { display: flex; gap: 12px; justify-content: flex-end; margin-top: 24px; flex-wrap: wrap; }
 
 .quick-options { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 8px; }
 .date-preview { padding: 12px 16px; background: var(--bg-tertiary); border-radius: var(--radius-md); font-size: 14px; color: var(--text-secondary); margin-bottom: 16px; }
@@ -456,5 +457,13 @@ export default {
 .warning-text { flex: 1; }
 .warning-text strong { color: var(--text-primary); }
 .warning-note { color: var(--text-tertiary); font-size: 12px; margin-top: 4px; }
+
+@media (max-width: 768px) {
+  .header-actions { flex-wrap: wrap; }
+  .header-actions .btn { flex: 1 1 auto; min-width: 0; font-size: 13px; }
+  .modal-actions .btn { flex: 1 1 auto; min-width: 0; padding: 10px 12px; font-size: 13px; }
+  .block-item { flex-direction: column; align-items: flex-start; }
+  .form-row { grid-template-columns: 1fr; }
+}
 </style>
 

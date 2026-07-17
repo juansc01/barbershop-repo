@@ -358,17 +358,31 @@ export default {
       this.currentStep--
     },
     validatePhone() {
-      const phone = this.customer.phone.replace(/\s/g, '')
+      const phone = this.customer.phone.replace(/[\s\-().]/g, '')
       if (!phone) {
         this.phoneError = ''
         return false
       }
-      if (!/^[0-9+]+$/.test(phone)) {
-        this.phoneError = 'Solo números y + permitidos'
+      // Solo dígitos y opcionalmente un + al inicio
+      if (!/^\+?\d+$/.test(phone)) {
+        this.phoneError = 'Solo números y un + al inicio están permitidos'
         return false
       }
-      if (phone.length < 9) {
-        this.phoneError = 'Mínimo 9 dígitos'
+      const digits = phone.replace(/\D/g, '')
+      if (digits.length < 9) {
+        this.phoneError = 'El teléfono debe tener al menos 9 dígitos'
+        return false
+      }
+      if (digits.length > 15) {
+        this.phoneError = 'El teléfono no puede tener más de 15 dígitos'
+        return false
+      }
+      // Validar formato español: empieza por 6, 7, 8 o 9 (sin prefijo) o con +34
+      const isSpanish = /^(\+34)?\d{9}$/.test(phone)
+      const isInternational = /^\+\d{9,15}$/.test(phone)
+      const isLocalValid = /^[6-9]\d{8}$/.test(phone)
+      if (!isSpanish && !isInternational && !isLocalValid) {
+        this.phoneError = 'Introduce un teléfono válido (ej: 612345678 o +34612345678)'
         return false
       }
       this.phoneError = ''

@@ -304,6 +304,16 @@ export default {
   gap: 12px;
   justify-content: flex-end;
   margin-top: 24px;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 768px) {
+  .modal-actions .btn {
+    flex: 1 1 auto;
+    min-width: 0;
+    padding: 10px 12px;
+    font-size: 13px;
+  }
 }
 
 /* FullCalendar overrides */

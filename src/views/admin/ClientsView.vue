@@ -200,8 +200,28 @@ export default {
 .history-service { flex: 1; }
 
 .modal-title { font-size: 18px; font-weight: 700; margin-bottom: 16px; }
-.modal-actions { display: flex; gap: 12px; justify-content: flex-end; margin-top: 24px; }
+.modal-actions { display: flex; gap: 12px; justify-content: flex-end; margin-top: 24px; flex-wrap: wrap; }
 
 tr { cursor: pointer; }
+
+@media (max-width: 768px) {
+  .modal-actions {
+    flex-wrap: wrap;
+  }
+  .modal-actions .btn {
+    flex: 1 1 auto;
+    min-width: 0;
+    text-align: center;
+    padding: 10px 12px;
+    font-size: 13px;
+  }
+  .history-item {
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .history-date {
+    min-width: auto;
+  }
+}
 </style>
 
