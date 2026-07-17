@@ -7,7 +7,7 @@
           <span class="logo-icon">✂</span>
           <span class="logo-text">Tito's Barber Shop</span>
         </div>
-        <router-link to="/admin" class="btn btn-ghost btn-sm">Panel Admin</router-link>
+        <router-link to="/admin" class="btn btn-sm admin-btn">Panel Admin</router-link>
       </div>
     </nav>
 
@@ -134,12 +134,12 @@ export default {
 }
 
 .hero {
-  min-height: 100vh;
+  min-height: 70vh;
   display: flex;
   align-items: center;
   justify-content: center;
   text-align: center;
-  padding: 100px 24px;
+  padding: 80px 24px 40px;
   background: radial-gradient(ellipse at center top, rgba(99, 102, 241, 0.08) 0%, transparent 60%);
 }
 
@@ -218,7 +218,7 @@ export default {
 
 .schedule-section,
 .contact-section {
-  padding: 40px 0;
+  padding: 24px 0;
 }
 
 .schedule-card,
@@ -315,7 +315,7 @@ export default {
 .footer {
   padding: 40px 0;
   border-top: 1px solid var(--border-color);
-  margin-top: 60px;
+  margin-top: 40px;
 }
 
 .footer-inner {
@@ -325,6 +325,32 @@ export default {
 .footer-text {
   font-size: 13px;
   color: var(--text-tertiary);
+}
+
+.admin-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-tertiary);
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  transition: all 0.2s ease;
+  opacity: 0.6;
+}
+
+.admin-btn:hover {
+  opacity: 1;
+  color: var(--text-primary);
+  background: rgba(255, 255, 255, 0.06);
+  border-color: var(--accent);
+}
+
+.admin-btn-icon {
+  font-size: 13px;
 }
 </style>
 
