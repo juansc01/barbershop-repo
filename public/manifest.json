@@ -1,0 +1,21 @@
+{
+  "name": "Tito's Barber Shop",
+  "short_name": "Tito's Barber",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#121215",
+  "theme_color": "#121215",
+  "icons": [
+    {
+      "src": "/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    },
+    {
+      "src": "/favicon.png",
+      "sizes": "32x32",
+      "type": "image/png"
+    }
+  ]
+}
+
