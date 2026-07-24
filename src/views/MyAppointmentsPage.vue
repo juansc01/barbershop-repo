@@ -120,7 +120,7 @@ export default {
           const customerIds = customers.map(c => c.id)
           const { data: apts } = await supabase
             .from('appointments')
-            .select('*, services(name), barbers(name)')
+            .select('*, services(name), barbers(name), customers(name, phone)')
             .in('customer_id', customerIds)
             .eq('status', 'confirmed')
             .gte('start_time', now)
@@ -148,6 +148,19 @@ export default {
         if (error) throw error
         apt.status = 'cancelled'
         useToast().success('Cita cancelada correctamente')
+
+        // Send email notification (non-blocking)
+        import('../services/emailService.js').then(({ emailService }) => {
+          emailService.notifyCancelledAppointment({
+            customerName: apt.customers?.name || this.phone,
+            customerPhone: this.phone,
+            service: apt.services?.name || '-',
+            barber: apt.barbers?.name || '-',
+            date: new Date(apt.start_time).toLocaleDateString('es-ES', { weekday: 'long', day: 'numeric', month: 'long' }),
+            time: new Date(apt.start_time).toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit' }),
+            price: apt.price
+          })
+        }).catch(() => {})
       } catch (e) {
         useToast().error('Error al cancelar la cita')
       }
